@@ -85,6 +85,43 @@ public class JFormSanPham extends javax.swing.JPanel {
     }
     
     public void loadTextField(){
+        int index = tblChiTietSP.getSelectedRow();
+        txtMaCTSP.setText(tblChiTietSP.getValueAt(index, 0).toString());
+        
+        for (int i = 0; i < tblChiTietSP.getRowCount(); i++) {
+            if(cbChatLieu.getItemAt(i).getTen().equalsIgnoreCase(tblChiTietSP.getValueAt(index, 1).toString())){
+                cbChatLieu.setSelectedIndex(i);
+            }
+        }
+        
+        for (int i = 0; i < tblChiTietSP.getRowCount(); i++) {
+            if(cbMauSac.getItemAt(i).getTen().equalsIgnoreCase(tblChiTietSP.getValueAt(index, 2).toString())){
+                cbMauSac.setSelectedIndex(i);
+            }
+        }
+        
+        for (int i = 0; i < tblChiTietSP.getRowCount(); i++) {
+            if(cbSize.getItemAt(i).getSoSize().equalsIgnoreCase(tblChiTietSP.getValueAt(index, 3).toString())){
+                cbSize.setSelectedIndex(i);
+            }
+        }
+        
+        for (int i = 0; i < tblChiTietSP.getRowCount(); i++) {
+            if(cbSanPham.getItemAt(i).getTen().equalsIgnoreCase(tblChiTietSP.getValueAt(index, 4).toString())){
+                cbSanPham.setSelectedIndex(i);
+            }
+        }
+        txtMota.setText(tblChiTietSP.getValueAt(index, 5).toString());
+        txtSoLuongTon.setText(tblChiTietSP.getValueAt(index, 6).toString());
+        txtGiaNhap.setText(tblChiTietSP.getValueAt(index, 7).toString());
+        txtGiaBan.setText(tblChiTietSP.getValueAt(index, 8).toString());
+        
+        if(tblChiTietSP.getValueAt(index, 9).toString().equalsIgnoreCase("còn bán")){
+            rdConHang.setSelected(true);
+        }
+        if(tblChiTietSP.getValueAt(index, 9).toString().equalsIgnoreCase("ngừng bán")){
+            rdNgungKD.setSelected(true);
+        }
         
     }
 
@@ -171,6 +208,11 @@ public class JFormSanPham extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblChiTietSP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblChiTietSPMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblChiTietSP);
 
         javax.swing.GroupLayout panelBorder6Layout = new javax.swing.GroupLayout(panelBorder6);
@@ -556,6 +598,11 @@ public class JFormSanPham extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tblChiTietSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblChiTietSPMouseClicked
+        // TODO add your handling code here:
+        loadTextField();
+    }//GEN-LAST:event_tblChiTietSPMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
