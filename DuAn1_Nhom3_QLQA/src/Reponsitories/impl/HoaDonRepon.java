@@ -49,13 +49,48 @@ public class HoaDonRepon implements HoaDonIRepon {
     }
 
     @Override
-    public HoaDonDM getOne(String ID) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public HoaDonVM getOne(Integer trangThai) {
+        String query = "SELECT MaHD, NgayTao, TenKH, TrangThai\n"
+                + "FROM     HoaDon\n"
+                + "WHERE TrangThai = ?";
+        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, trangThai);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                HoaDonVM hoaDon1 = new HoaDonVM();
+                hoaDon1.setMaHD(rs.getString("MaHD"));
+                hoaDon1.setNgayTao(rs.getString("NgayTao"));
+                hoaDon1.setTenKH(rs.getString("TenKH"));
+                hoaDon1.setTrangThai(rs.getInt("TrangThai"));
+                return hoaDon1;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
     public boolean add(HoaDonDM a) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = "INSERT INTO HoaDon\n"
+                + "                  (NgayTao, TenKH, SDTKH, TrangThai)\n"
+                + "VALUES (?,?,?,2)";
+        int check = 0;
+        try {
+            Connection connection = DBConnection.getConnection();
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setObject(1, a.getNgayTao());
+            ps.setObject(2, a.getTenKH());
+            ps.setObject(3, a.getSDTKH());
+            check = ps.executeUpdate();
+
+            ps.close();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return check > 0;
     }
 
     @Override

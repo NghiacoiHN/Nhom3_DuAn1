@@ -49,5 +49,14 @@ public class HoaDonVM {
     public void setTrangThai(Integer trangThai) {
         this.trangThai = trangThai;
     }
-    
+
+    public String loadTrangThai() {
+        if (this.trangThai == 1) {
+            return "Đã thanh toán";
+        } else if (true) {
+            return "Chưa thanh toán";
+        } else {
+            return null;
+        }
+    }
 }

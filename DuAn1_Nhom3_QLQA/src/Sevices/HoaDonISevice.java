@@ -17,7 +17,7 @@ public interface HoaDonISevice {
 
     List<HoaDonVM> findAll();
 
-    HoaDonDM getOne(String ID);
+    HoaDonVM getOne(Integer trangThai);
 
     boolean add(HoaDonDM a);
 

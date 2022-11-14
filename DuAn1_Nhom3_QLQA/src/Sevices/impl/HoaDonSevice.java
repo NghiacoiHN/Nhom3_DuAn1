@@ -30,13 +30,23 @@ public class HoaDonSevice implements HoaDonISevice {
     }
 
     @Override
-    public HoaDonDM getOne(String ID) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public HoaDonVM getOne(Integer trangThai) {
+        try {
+            return hdRepon.getOne(trangThai);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
     public boolean add(HoaDonDM a) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            return hdRepon.add(a);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
