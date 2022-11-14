@@ -5,19 +5,19 @@
 package Sevices.impl;
 
 import DomainModels.HoaDonDM;
-import Reponsitories.impl.HoaDonRepositoryImpl;
+import Reponsitories.impl.HoaDonRepon;
 import ViewModels.HoaDonVM;
 import java.util.List;
-import Sevices.HoaDonSevice;
-import Reponsitories.HoaDonRepository;
+import Reponsitories.HoaDonIRepon;
+import Sevices.HoaDonISevice;
 
 /**
  *
  * @author TRONG NGHIA
  */
-public class HoaDonSeviceImpl implements HoaDonSevice {
+public class HoaDonSevice implements HoaDonISevice {
 
-    HoaDonRepository hdRepon = new HoaDonRepositoryImpl();
+    HoaDonIRepon hdRepon = new HoaDonRepon();
 
     @Override
     public List<HoaDonVM> findAll() {

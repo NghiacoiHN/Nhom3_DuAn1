@@ -13,13 +13,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import Reponsitories.HoaDonRepository;
+import Reponsitories.HoaDonIRepon;
 
 /**
  *
  * @author TRONG NGHIA
  */
-public class HoaDonRepositoryImpl implements HoaDonRepository {
+public class HoaDonRepon implements HoaDonIRepon {
 
     @Override
     public List<HoaDonVM> findAll() {
