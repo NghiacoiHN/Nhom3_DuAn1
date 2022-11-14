@@ -53,6 +53,11 @@ public class SanPham {
         this.trangThai = trangThai;
     }
 
+    @Override
+    public String toString() {
+        return ten;
+    }
+
     
     
     

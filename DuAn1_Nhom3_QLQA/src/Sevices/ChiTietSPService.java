@@ -5,7 +5,7 @@
 package Sevices;
 
 import DomainModels.ChiTietSP;
-import ViewModels.ChiTietSPReponse;
+import ViewModels.ChiTietSPResponse;
 import java.util.List;
 
 /**
@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface ChiTietSPService {
     List<ChiTietSP> getAll();
-    List<ChiTietSPReponse> getView();
+    List<ChiTietSPResponse> getView();
     boolean checkMa(String maCTSP);
     
     String add(ChiTietSP ctsp);

@@ -5,7 +5,7 @@
 package Reponsitories;
 
 import DomainModels.ChiTietSP;
-import ViewModels.ChiTietSPReponse;
+import ViewModels.ChiTietSPResponse;
 import java.util.List;
 
 /**
@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface ChiTietSPReponsitory {
     List<ChiTietSP> getAll();
-    List<ChiTietSPReponse> getView();
+    List<ChiTietSPResponse> getView();
     Integer add(ChiTietSP ctsp);
     Integer update(ChiTietSP ctsp);
     Integer delete(String maCTSP);

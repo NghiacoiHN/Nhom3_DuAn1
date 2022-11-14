@@ -7,7 +7,7 @@ package Reponsitories.impl;
 import DomainModels.ChiTietSP;
 import Reponsitories.ChiTietSPReponsitory;
 import Utilities.DBConnection;
-import ViewModels.ChiTietSPReponse;
+import ViewModels.ChiTietSPResponse;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Connection;
@@ -52,8 +52,8 @@ public class ChiTietSPReponsitoryImpl implements ChiTietSPReponsitory{
     }
 
     @Override
-    public List<ChiTietSPReponse> getView() {
-        List<ChiTietSPReponse> listCTSP = new ArrayList<>();
+    public List<ChiTietSPResponse> getView() {
+        List<ChiTietSPResponse> listCTSP = new ArrayList<>();
         String sql = """
                      select MaCTSP, TenCL, TenMS, TenSize, TenSp, MoTa, SoLuongTon, GiaNhap, GiaBan, TrangThai
                        from ChiTietSanPham join ChatLieu on ChiTietSanPham.IDCL = ChatLieu.IDCL
@@ -64,7 +64,7 @@ public class ChiTietSPReponsitoryImpl implements ChiTietSPReponsitory{
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()){
-                listCTSP.add(new ChiTietSPReponse(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), 
+                listCTSP.add(new ChiTietSPResponse(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), 
                         rs.getInt(7),rs.getBigDecimal(8), rs.getBigDecimal(9), rs.getInt(10)));
             }
             

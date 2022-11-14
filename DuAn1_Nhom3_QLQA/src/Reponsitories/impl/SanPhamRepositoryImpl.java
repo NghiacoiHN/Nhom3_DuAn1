@@ -26,7 +26,7 @@ public class SanPhamRepositoryImpl implements SanPhamRepository{
 
             Connection connection = DBConnection.getConnection();
 
-            String sql = "SELECT IDSP, MaSP, TenSp, TrangThai FROM SanPham";
+            String sql = "SELECT IDSP, MaSP, TenSp, TinhTrang FROM SanPham";
 
             PreparedStatement ps = connection.prepareStatement(sql);
 
@@ -36,11 +36,13 @@ public class SanPhamRepositoryImpl implements SanPhamRepository{
                 String id = rs.getString(1);
                 String ma = rs.getString(2);
                 String ten = rs.getString(3);
+                Integer trangThai = rs.getInt(4);
 
                 SanPhamResponse sanPham = new SanPhamResponse();
                 sanPham.setId(id);
                 sanPham.setMa(ma);
                 sanPham.setTen(ten);
+                sanPham.setTrangThai(trangThai);
                 dsSanPham.add(sanPham);
             }
             rs.close();
@@ -60,7 +62,7 @@ public class SanPhamRepositoryImpl implements SanPhamRepository{
         try {
             Connection connection = DBConnection.getConnection();
 
-            String sql = "INSERT INTO SanPham(MaSP, TenSp, TrangThai) VALUES (?, ?, ?)";
+            String sql = "INSERT INTO SanPham(MaSP, TenSp, TinhTrang) VALUES (?, ?, ?)";
 
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, sanPham.getMa());
@@ -83,12 +85,13 @@ public class SanPhamRepositoryImpl implements SanPhamRepository{
         try {
             Connection connection = DBConnection.getConnection();
 
-            String sql = "UPDATE SanPham SET Ma = ?, Ten = ? WHERE Id = ?";
+            String sql = "UPDATE SanPham SET MaSP = ?, TenSp = ?, TinhTrang = ? WHERE IDSP = ?";
 
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, sanPham.getMa());
             ps.setString(2, sanPham.getTen());
-            ps.setString(3, id);
+            ps.setInt(3, sanPham.getTrangThai());
+            ps.setString(4, id);
 
             check = ps.executeUpdate();
 
@@ -106,7 +109,7 @@ public class SanPhamRepositoryImpl implements SanPhamRepository{
         try {
             Connection connection = DBConnection.getConnection();
 
-            String sql = "DELETE FROM SanPham WHERE Id = ?";
+            String sql = "UPDATE SanPham SET TinhTrang = 10 WHERE IDSP = ?";
 
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, id);

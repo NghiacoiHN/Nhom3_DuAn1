@@ -53,4 +53,10 @@ public class Size {
         this.trangThai = trangThai;
     }
 
+    @Override
+    public String toString() {
+        return coSize;
+    }
+    
+    
 }

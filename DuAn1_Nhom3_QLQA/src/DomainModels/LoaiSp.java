@@ -63,4 +63,10 @@ public class LoaiSp {
         this.trangThai = trangThai;
     }
 
+    @Override
+    public String toString() {
+        return ten;
+    }
+    
+    
 }

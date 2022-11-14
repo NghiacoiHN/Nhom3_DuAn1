@@ -9,6 +9,7 @@ import Reponsitories.ChiTietSPReponsitory;
 import Reponsitories.impl.ChiTietSPReponsitoryImpl;
 import Sevices.ChiTietSPService;
 import ViewModels.ChiTietSPReponse;
+import ViewModels.ChiTietSPResponse;
 import java.util.List;
 
 /**
@@ -24,14 +25,9 @@ public class ChiTietSPServiceImpl implements ChiTietSPService{
     }
 
     @Override
-    public List<ChiTietSPReponse> getView() {
-        return ctspRepo.getView();
-    }
-
-    @Override
     public boolean checkMa(String maCTSP) {
-        List<ChiTietSPReponse> listCTSP = ctspRepo.getView();
-        for (ChiTietSPReponse ctsp : listCTSP) {
+        List<ChiTietSPResponse> listCTSP = ctspRepo.getView();
+        for (ChiTietSPResponse ctsp : listCTSP) {
             if(ctsp.getMaChiTietSP().equalsIgnoreCase(maCTSP)){
                 return true;
             }
@@ -64,6 +60,11 @@ public class ChiTietSPServiceImpl implements ChiTietSPService{
         }else{
             return "Xóa thành công";
         }
+    }
+
+    @Override
+    public List<ChiTietSPReponse> getView() {
+        return ctspRepo.getView();
     }
     
 }
