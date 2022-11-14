@@ -1,12 +1,11 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
 package Sevices;
 
+import Reponsitories.*;
 import DomainModels.HoaDonDM;
-import Reponsitories.HoaDonIRepon;
-import Reponsitories.imp.HoaDonRepon;
 import ViewModels.HoaDonVM;
 import java.util.List;
 
@@ -14,38 +13,15 @@ import java.util.List;
  *
  * @author TRONG NGHIA
  */
-public class HoaDonSevice implements HoaDonISevice {
+public interface HoaDonSevice {
 
-    HoaDonIRepon hdRepon = new HoaDonRepon();
+    List<HoaDonVM> findAll();
 
-    @Override
-    public List<HoaDonVM> findAll() {
-        try {
-            return hdRepon.findAll();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
+    HoaDonDM getOne(String ID);
 
-    @Override
-    public HoaDonDM getOne(String ID) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    boolean add(HoaDonDM a);
 
-    @Override
-    public boolean add(HoaDonDM a) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    boolean delete(String ma);
 
-    @Override
-    public boolean delete(String ma) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public boolean update(HoaDonDM a, String ID) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
+    boolean update(HoaDonDM a, String ID);
 }
