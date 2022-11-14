@@ -8,7 +8,6 @@ import DomainModels.ChiTietSP;
 import Reponsitories.ChiTietSPReponsitory;
 import Reponsitories.impl.ChiTietSPReponsitoryImpl;
 import Sevices.ChiTietSPService;
-import ViewModels.ChiTietSPReponse;
 import ViewModels.ChiTietSPResponse;
 import java.util.List;
 
@@ -22,7 +21,9 @@ public class ChiTietSPServiceImpl implements ChiTietSPService{
     @Override
     public List<ChiTietSP> getAll() {
         return ctspRepo.getAll();
+        
     }
+    
 
     @Override
     public boolean checkMa(String maCTSP) {
@@ -63,8 +64,10 @@ public class ChiTietSPServiceImpl implements ChiTietSPService{
     }
 
     @Override
-    public List<ChiTietSPReponse> getView() {
+    public List<ChiTietSPResponse> getView() {
         return ctspRepo.getView();
     }
+
+    
     
 }
