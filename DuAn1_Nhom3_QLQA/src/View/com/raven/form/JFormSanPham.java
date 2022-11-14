@@ -5,8 +5,16 @@
  */
 package View.com.raven.form;
 
+import Sevices.ChatLieuService;
 import Sevices.ChiTietSPService;
+import Sevices.MauSacService;
+import Sevices.SanPhamService;
+import Sevices.SizeService;
+import Sevices.impl.ChatLieuServiceImpl;
 import Sevices.impl.ChiTietSPServiceImpl;
+import Sevices.impl.MauSacServiceImpl;
+import Sevices.impl.SanPhamServiceImpl;
+import Sevices.impl.SizeServiceImpl;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import ViewModels.ChatLieuResponse;
@@ -21,7 +29,10 @@ import ViewModels.SizeResponse;
  */
 public class JFormSanPham extends javax.swing.JPanel {
     final ChiTietSPService ctspService = new ChiTietSPServiceImpl();
-    
+    final ChatLieuService clService = new ChatLieuServiceImpl();
+    final MauSacService msService = new MauSacServiceImpl();
+    final SizeService sizeService = new SizeServiceImpl();
+    final SanPhamService spService = new SanPhamServiceImpl();
 
     /**
      * Creates new form Form_1
@@ -29,6 +40,7 @@ public class JFormSanPham extends javax.swing.JPanel {
     public JFormSanPham() {
         initComponents();
         loadCTSP();
+        loadComboBox();
     }
     
     public void loadCTSP(){
@@ -47,6 +59,32 @@ public class JFormSanPham extends javax.swing.JPanel {
     }
     
     public void loadComboBox(){
+        cbChatLieu.removeAllItems();
+        List<ChatLieuResponse> listCL = clService.getAll();
+        for (ChatLieuResponse cl : listCL) {
+            cbChatLieu.addItem(cl);
+        }
+        
+        cbMauSac.removeAllItems();
+        List<MauSacResponse> listMS = msService.getAll();
+        for (MauSacResponse ms : listMS) {
+            cbMauSac.addItem(ms);
+        }
+        
+        cbSize.removeAllItems();
+        List<SizeResponse> listSize = sizeService.getAll();
+        for (SizeResponse size : listSize) {
+            cbSize.addItem(size);
+        }
+        
+        cbSanPham.removeAllItems();
+        List<SanPhamResponse> listSP = spService.getAll();
+        for (SanPhamResponse sp : listSP) {
+            cbSanPham.addItem(sp);
+        }
+    }
+    
+    public void loadTextField(){
         
     }
 
