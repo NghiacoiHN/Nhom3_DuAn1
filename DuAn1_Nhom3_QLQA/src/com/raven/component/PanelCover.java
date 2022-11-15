@@ -1,7 +1,6 @@
 package com.raven.component;
 
-import View.com.raven.main.ViewMainManage;
-import com.raven.swing.Button;
+
 import com.raven.swing.ButtonOutLine;
 import java.awt.Color;
 import java.awt.Font;
@@ -14,7 +13,6 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import net.miginfocom.swing.MigLayout;
 
 public class PanelCover extends javax.swing.JPanel {
@@ -36,7 +34,7 @@ public class PanelCover extends javax.swing.JPanel {
         init();
 //        getSelect();
     }
-
+    
     private void init() {
         title = new JLabel("Welcome Back!");
         title.setFont(new Font("sansserif", 1, 30));
@@ -52,6 +50,7 @@ public class PanelCover extends javax.swing.JPanel {
         button.setBackground(new Color(255, 255, 255));
         button.setForeground(new Color(255, 255, 255));
         button.setText("ĐĂNG KÝ");
+
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -122,36 +121,26 @@ public class PanelCover extends javax.swing.JPanel {
         layout.setComponentConstraints(description, "pad 0 " + v + "% 0 " + v + "%");
         layout.setComponentConstraints(description1, "pad 0 " + v + "% 0 " + v + "%");
     }
-    Button btnDK = new Button();
-    Button btnDN = new Button();
 
     public void login(boolean login) {
         if (this.isLogin != login) {
             if (login) {
-                title.setText("hello, Friend!");
-                description.setText("Enter your personal details");
-                description1.setText("and start journey with us");
-                button.setText("ĐĂNG KÝ");
+                title.setText("Hello, Friend!");
+                description.setText("Are You Forgot Your Password???");
+                description1.setText("Click Here");
+                button.setText("Quên Mật Khẩu???");
 
             } else {
                 title.setText("Welcome Back!");
-                description.setText("To keep connected with us please");
-                description1.setText("login with your personal info");
+                description.setText("Do You Want Login???");
+                description1.setText("Click Here");
                 button.setText("ĐĂNG NHẬP");
-
             }
             this.isLogin = login;
         }
     }
 
-//    public void getSelect(){
-//        btnDK.addActionListener(new ActionListener() {
-//                    @Override
-//                    public void actionPerformed(ActionEvent e) {
-//                    new ViewMainManage().setVisible(true);
-//                    }
-//                });
-//    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

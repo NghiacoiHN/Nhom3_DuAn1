@@ -67,23 +67,31 @@ public class JFormBanHang extends javax.swing.JPanel {
         lbngayHienTai.setText(format);
     }
 
-    private Integer choseStatus() {
-        int index = 0;
-        if (rdTatCa.isSelected()) {
-            index = 0;
-        } else if (rdThanhToan.isSelected()) {
-            index = 1;
-        } else if (rdChuaThanhToan.isSelected()) {
-            index = 2;
-        }
-        return index;
-    }
-
     private void loadStatus() {
-        hdsv.getOne(choseStatus());
-        loadTBDSHD();
+        if (rdTatCa.isSelected()) {
+            loadTBDSHD();
+        } else if (rdThanhToan.isSelected()) {
+            hdsv.getOne(1);
+        } else if (rdChuaThanhToan.isSelected()) {
+            hdsv.getOne(2);
+        }
     }
 
+//    private Integer choseStatus() {
+//        int index = 0;
+//        if (rdTatCa.isSelected()) {
+//            index = 0;
+//        } else if (rdThanhToan.isSelected()) {
+//            index = 1;
+//        } else if (rdChuaThanhToan.isSelected()) {
+//            index = 2;
+//        }
+//        return index;
+//    }
+//    private void loadStatus() {
+//        hdsv.getOne(choseStatus());
+//        loadTBDSHD();
+//    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -98,6 +106,8 @@ public class JFormBanHang extends javax.swing.JPanel {
         spTable3 = new javax.swing.JScrollPane();
         btlDSSP1 = new com.raven.swing.Table();
         buttonGroup1 = new javax.swing.ButtonGroup();
+        popMenuGH = new javax.swing.JPopupMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
         panelBorder1 = new com.raven.swing.PanelBorder();
         jLabel2 = new javax.swing.JLabel();
         spTable = new javax.swing.JScrollPane();
@@ -192,6 +202,15 @@ public class JFormBanHang extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/Xoa.png"))); // NOI18N
+        jMenuItem2.setText("Xóa");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        popMenuGH.add(jMenuItem2);
+
         panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel2.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
@@ -242,6 +261,11 @@ public class JFormBanHang extends javax.swing.JPanel {
         );
 
         panelBorder2.setBackground(new java.awt.Color(255, 255, 255));
+        panelBorder2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                panelBorder2MouseReleased(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(127, 127, 127));
@@ -265,6 +289,11 @@ public class JFormBanHang extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tblGioHang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tblGioHangMouseReleased(evt);
+            }
+        });
         spTable2.setViewportView(tblGioHang);
 
         btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/Xoa.png"))); // NOI18N
@@ -277,13 +306,16 @@ public class JFormBanHang extends javax.swing.JPanel {
             .addGroup(panelBorder2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(spTable2)
                     .addGroup(panelBorder2Layout.createSequentialGroup()
                         .addGroup(panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                            .addComponent(spTable2, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
+                            .addGroup(panelBorder2Layout.createSequentialGroup()
+                                .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(panelBorder2Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         panelBorder2Layout.setVerticalGroup(
             panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -324,6 +356,9 @@ public class JFormBanHang extends javax.swing.JPanel {
         tblHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblHoaDonMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tblHoaDonMouseReleased(evt);
             }
         });
         spTable1.setViewportView(tblHoaDon);
@@ -629,7 +664,7 @@ public class JFormBanHang extends javax.swing.JPanel {
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 613, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         panelBorder6.setBackground(new java.awt.Color(255, 255, 255));
@@ -730,8 +765,27 @@ public class JFormBanHang extends javax.swing.JPanel {
 
     private void rdThanhToanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdThanhToanMouseClicked
         // TODO add your handling code here:
- 
+
     }//GEN-LAST:event_rdThanhToanMouseClicked
+
+    private void tblGioHangMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGioHangMouseReleased
+        // TODO add your handling code here:
+        if (evt.isPopupTrigger()) {
+            popMenuGH.show(panelBorder2, evt.getX(), evt.getX());
+        }
+    }//GEN-LAST:event_tblGioHangMouseReleased
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void panelBorder2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBorder2MouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_panelBorder2MouseReleased
+
+    private void tblHoaDonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblHoaDonMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -758,6 +812,7 @@ public class JFormBanHang extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField3;
@@ -772,6 +827,7 @@ public class JFormBanHang extends javax.swing.JPanel {
     private com.raven.swing.PanelBorder panelBorder7;
     private com.raven.swing.PanelBorder panelBorder8;
     private com.raven.swing.PanelBorder panelBorder9;
+    private javax.swing.JPopupMenu popMenuGH;
     private javax.swing.JRadioButton rdChuaThanhToan;
     private javax.swing.JRadioButton rdTatCa;
     private javax.swing.JRadioButton rdThanhToan;
