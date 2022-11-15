@@ -5,7 +5,6 @@
 package Reponsitories.impl;
 
 import DomainModels.HoaDonDM;
-import Reponsitories.HoaDonIRepon;
 import Utilities.DBConnection;
 import ViewModels.HoaDonVM;
 import java.sql.Connection;
@@ -14,12 +13,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import Reponsitories.HoaDonRepository;
 
 /**
  *
  * @author TRONG NGHIA
  */
-public class HoaDonRepon implements HoaDonIRepon {
+public class HoaDonRepositoryImpl implements HoaDonRepository {
 
     @Override
     public List<HoaDonVM> findAll() {

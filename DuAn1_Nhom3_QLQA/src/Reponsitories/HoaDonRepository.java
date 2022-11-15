@@ -2,9 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package Sevices;
+package Reponsitories;
 
-import Reponsitories.*;
 import DomainModels.HoaDonDM;
 import ViewModels.HoaDonVM;
 import java.util.List;
@@ -13,7 +12,7 @@ import java.util.List;
  *
  * @author TRONG NGHIA
  */
-public interface HoaDonISevice {
+public interface HoaDonRepository {
 
     List<HoaDonVM> findAll();
 

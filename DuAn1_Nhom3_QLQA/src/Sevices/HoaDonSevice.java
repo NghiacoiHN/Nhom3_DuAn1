@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author TRONG NGHIA
  */
-public interface HoaDonISevice {
+public interface HoaDonSevice {
 
     List<HoaDonVM> findAll();
 
