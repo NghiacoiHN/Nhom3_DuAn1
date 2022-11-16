@@ -4,10 +4,16 @@
  */
 package Application;
 
+import View.com.raven.form.JFormLichSu;
+
 /**
  *
  * @author TRONG NGHIA
  */
 public class LoginALCT {
+    
+    public static void main(String[] args) {
+        
+    }
     
 }

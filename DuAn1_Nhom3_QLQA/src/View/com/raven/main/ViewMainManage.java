@@ -10,6 +10,7 @@ import View.com.raven.form.JFormBanHang;
 import View.com.raven.form.JFormSanPham;
 import View.com.raven.form.JFormHoaDon;
 import View.com.raven.form.JFormDoanhThu;
+import View.com.raven.form.JFormLichSu;
 import View.com.raven.form.JFromNhanVien;
 import java.awt.Color;
 import javax.swing.JComponent;
@@ -29,6 +30,7 @@ public class ViewMainManage extends javax.swing.JFrame {
     private JFormSanPham formSP;
     private JFormHoaDon formHD;
     private JFromNhanVien formNV;
+    private JFormLichSu formLS;
 
     public ViewMainManage() {
         initComponents();
@@ -38,6 +40,7 @@ public class ViewMainManage extends javax.swing.JFrame {
         formSP = new JFormSanPham();
         formHD = new JFormHoaDon();
         formNV = new JFromNhanVien();
+        formLS = new JFormLichSu();
         menu.initMoving(ViewMainManage.this);
         menu.addEventMenuSelected(new EventMenuSelected() {
             @Override
