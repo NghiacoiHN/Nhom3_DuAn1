@@ -13,9 +13,9 @@ import java.util.List;
  * @author TRONG NGHIA
  */
 public interface GioHangIRepon {
-//    List<GioHangVM> findAll();
+    List<GioHangVM> findAll();
 
-    GioHangVM getOne(String ma);
+    List<GioHangVM> getOne(String ma);
 
 //    boolean add(SanPhamDM a);
 

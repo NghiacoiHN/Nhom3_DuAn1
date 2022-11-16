@@ -16,7 +16,7 @@ public interface HoaDonIRepon {
 
     List<HoaDonVM> findAll();
 
-    HoaDonVM getOne(Integer trangThai);
+    List<HoaDonVM> findByTT(Integer trangThai);
 
     boolean add(HoaDonDM a);
 

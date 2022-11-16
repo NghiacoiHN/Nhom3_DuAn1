@@ -21,46 +21,49 @@ import java.util.List;
  */
 public class GioHangRepon implements GioHangIRepon {
 
-//    @Override
-//    public List<GioHangVM> findAll() {
-//        List<GioHangVM> products = new ArrayList<>();
-//        String sql = "SELECT HoaDon.MaHD, SanPham.TenSp, LoaiSP.TenLSP, ChatLieu.TenCL, MauSac.TenMS, Size.TenSize, HoaDonChiTiet.SoLuong, HoaDonChiTiet.DonGia\n"
-//                + "FROM     ChiTietSanPham INNER JOIN\n"
-//                + "                  SanPham ON ChiTietSanPham.IDSP = SanPham.IDSP INNER JOIN\n"
-//                + "                  LoaiSPCT ON ChiTietSanPham.IDCTSP = LoaiSPCT.IDCTSP INNER JOIN\n"
-//                + "                  LoaiSP ON LoaiSPCT.IDLSP = LoaiSP.IDLSP INNER JOIN\n"
-//                + "                  ChatLieu ON ChiTietSanPham.IDCL = ChatLieu.IDCL INNER JOIN\n"
-//                + "                  MauSac ON ChiTietSanPham.IDMS = MauSac.IDMS INNER JOIN\n"
-//                + "                  HoaDonChiTiet ON ChiTietSanPham.IDCTSP = HoaDonChiTiet.IDCTSP INNER JOIN\n"
-//                + "                  HoaDon ON HoaDonChiTiet.IDHD = HoaDon.IDHD INNER JOIN\n"
-//                + "                  Size ON ChiTietSanPham.IDSize = Size.IDSize\n";
-//        try {
-//            Connection connection = DBConnection.getConnection();
-//            PreparedStatement ps = connection.prepareStatement(sql);
-//            ResultSet rs = ps.executeQuery();
-//            while (rs.next()) {
-//               GioHangVM gioHang1 = new GioHangVM();
-//                gioHang1.setMaHD(rs.getString("MaHD"));
-//                gioHang1.setTenSP(rs.getString("TenSp"));
-//                gioHang1.setTenLoaiSP(rs.getString("TenLSP"));
-//                gioHang1.setTenCL(rs.getString("TenCL"));
-//                gioHang1.setTenMS(rs.getString("TenMS"));
-//                gioHang1.setTenSize(rs.getString("TenSize"));
-//                gioHang1.setSoLuong(rs.getInt("SoLuong"));
-//                gioHang1.setDonGia(rs.getBigDecimal("DonGia"));
-//            }
-//            rs.close();
-//            ps.close();
-//            connection.close();
-//        } catch (SQLException ex) {
-//            ex.printStackTrace();
-//        }
-//
-//        return products;
-//    }
     @Override
-    public GioHangVM getOne(String ma) {
-        String query = "SELECT HoaDon.MaHD, SanPham.TenSp, LoaiSP.TenLSP, ChatLieu.TenCL, MauSac.TenMS, Size.TenSize, HoaDonChiTiet.SoLuong, HoaDonChiTiet.DonGia\n"
+    public List<GioHangVM> findAll() {
+        List<GioHangVM> products = new ArrayList<>();
+        String sql = "SELECT HoaDon.MaHD, SanPham.TenSp, LoaiSP.TenLSP, ChatLieu.TenCL, MauSac.TenMS, Size.TenSize, HoaDonChiTiet.SoLuong, HoaDonChiTiet.DonGia\n"
+                + "FROM     ChiTietSanPham INNER JOIN\n"
+                + "                  SanPham ON ChiTietSanPham.IDSP = SanPham.IDSP INNER JOIN\n"
+                + "                  LoaiSPCT ON ChiTietSanPham.IDCTSP = LoaiSPCT.IDCTSP INNER JOIN\n"
+                + "                  LoaiSP ON LoaiSPCT.IDLSP = LoaiSP.IDLSP INNER JOIN\n"
+                + "                  ChatLieu ON ChiTietSanPham.IDCL = ChatLieu.IDCL INNER JOIN\n"
+                + "                  MauSac ON ChiTietSanPham.IDMS = MauSac.IDMS INNER JOIN\n"
+                + "                  HoaDonChiTiet ON ChiTietSanPham.IDCTSP = HoaDonChiTiet.IDCTSP INNER JOIN\n"
+                + "                  HoaDon ON HoaDonChiTiet.IDHD = HoaDon.IDHD INNER JOIN\n"
+                + "                  Size ON ChiTietSanPham.IDSize = Size.IDSize";
+        try {
+            Connection connection = DBConnection.getConnection();
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                GioHangVM gioHang1 = new GioHangVM();
+                gioHang1.setMaHD(rs.getString("MaHD"));
+                gioHang1.setTenSP(rs.getString("TenSp"));
+                gioHang1.setTenLoaiSP(rs.getString("TenLSP"));
+                gioHang1.setTenCL(rs.getString("TenCL"));
+                gioHang1.setTenMS(rs.getString("TenMS"));
+                gioHang1.setTenSize(rs.getString("TenSize"));
+                gioHang1.setSoLuong(rs.getInt("SoLuong"));
+                gioHang1.setDonGia(rs.getBigDecimal("DonGia"));
+                products.add(gioHang1);
+            }
+            rs.close();
+            ps.close();
+            connection.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return products;
+    }
+
+    @Override
+    public List<GioHangVM> getOne(String ma) {
+        List<GioHangVM> products = new ArrayList<>();
+        String sql = "SELECT HoaDon.MaHD, SanPham.TenSp, LoaiSP.TenLSP, ChatLieu.TenCL, MauSac.TenMS, Size.TenSize, HoaDonChiTiet.SoLuong, HoaDonChiTiet.DonGia\n"
                 + "FROM     ChiTietSanPham INNER JOIN\n"
                 + "                  SanPham ON ChiTietSanPham.IDSP = SanPham.IDSP INNER JOIN\n"
                 + "                  LoaiSPCT ON ChiTietSanPham.IDCTSP = LoaiSPCT.IDCTSP INNER JOIN\n"
@@ -71,10 +74,12 @@ public class GioHangRepon implements GioHangIRepon {
                 + "                  HoaDon ON HoaDonChiTiet.IDHD = HoaDon.IDHD INNER JOIN\n"
                 + "                  Size ON ChiTietSanPham.IDSize = Size.IDSize\n"
                 + "WHERE HoaDon.MaHD = ?";
-        try ( Connection con = DBConnection.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+        try {
+            Connection connection = DBConnection.getConnection();
+            PreparedStatement ps = connection.prepareStatement(sql);
             ps.setObject(1, ma);
             ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 GioHangVM gioHang1 = new GioHangVM();
                 gioHang1.setMaHD(rs.getString("MaHD"));
                 gioHang1.setTenSP(rs.getString("TenSp"));
@@ -84,13 +89,16 @@ public class GioHangRepon implements GioHangIRepon {
                 gioHang1.setTenSize(rs.getString("TenSize"));
                 gioHang1.setSoLuong(rs.getInt("SoLuong"));
                 gioHang1.setDonGia(rs.getBigDecimal("DonGia"));
-                ps.executeUpdate();
-                return gioHang1;
+                products.add(gioHang1);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            rs.close();
+            ps.close();
+            connection.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
-        return null;
+
+        return products;
     }
 //
 //    @Override

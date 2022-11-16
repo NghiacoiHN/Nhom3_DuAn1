@@ -8,6 +8,7 @@ import Reponsitories.GioHangIRepon;
 import Reponsitories.impl.GioHangRepon;
 import Sevices.GioHangISevice;
 import ViewModels.GioHangVM;
+import java.util.List;
 
 
 /**
@@ -18,18 +19,18 @@ public class GioHangSevice implements GioHangISevice {
 
     GioHangIRepon ghRepon = new GioHangRepon();
 
-//    @Override
-//    public List<HoaDonVM> findAll() {
-//        try {
-//            return hdRepon.findAll();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return null;
-//        }
-//    }
+    @Override
+    public List<GioHangVM> findAll() {
+        try {
+            return ghRepon.findAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     @Override
-    public GioHangVM getOne(String ma) {
+    public List<GioHangVM> getOne(String ma) {
         try {
             return ghRepon.getOne(ma);
         } catch (Exception e) {

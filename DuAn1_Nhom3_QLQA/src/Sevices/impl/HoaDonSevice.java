@@ -30,9 +30,9 @@ public class HoaDonSevice implements HoaDonISevice {
     }
 
     @Override
-    public HoaDonVM getOne(Integer trangThai) {
+    public List<HoaDonVM> findByTT(Integer trangThai) {
         try {
-            return hdRepon.getOne(trangThai);
+            return hdRepon.findByTT(trangThai);
         } catch (Exception e) {
             e.printStackTrace();
             return null;

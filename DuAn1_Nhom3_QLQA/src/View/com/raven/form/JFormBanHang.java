@@ -36,7 +36,7 @@ public class JFormBanHang extends javax.swing.JPanel {
         loadTBDSHD();
         loadTBDSGH();
         loadDateNow();
-        loadStatus();
+        choseStatus();
     }
     HoaDonISevice hdsv = new HoaDonSevice();
     SanPhamISevice spsv = new SanPhamSevice();
@@ -53,9 +53,13 @@ public class JFormBanHang extends javax.swing.JPanel {
     }
 
     private void loadTBDSGH() {
+        List<GioHangVM> listGH = ghsv.findAll();
         DefaultTableModel model = new DefaultTableModel();
         model.setColumnIdentifiers(new String[]{"Mã hóa đơn", "Tên sản phẩm", "Tên loại", "Chất liệu", "Màu sắc", "Size", "Số lượng", "Đơn giá"});
-
+        for (GioHangVM x : listGH) {
+            model.addRow(new Object[]{x.getMaHD(), x.getTenSP(), x.getTenLoaiSP(),
+                x.getTenCL(), x.getTenMS(), x.getTenSize(), x.getSoLuong(), x.getDonGia()});
+        }
         tblGioHang.setModel(model);
     }
 
@@ -80,31 +84,28 @@ public class JFormBanHang extends javax.swing.JPanel {
         lbngayHienTai.setText(format);
     }
 
-//    private void loadStatus() {
-//        if (rdTatCa.isSelected()) {
-//            loadTBDSHD();
-//        } else if (rdThanhToan.isSelected()) {
-//            hdsv.getOne(1);
+//    private Integer choseStatus() {
+//        int index = 0;
+//        if (rdThanhToan.isSelected()) {
+//            index = 1;
 //        } else if (rdChuaThanhToan.isSelected()) {
-//            hdsv.getOne(2);
+//            index = 2;
 //        }
+//        return index;
 //    }
-
-    private Integer choseStatus() {
-        int index = 0;
-        if (rdTatCa.isSelected()) {
-            index = 0;
+//    private void loadStatus() {
+//        hdsv.findByTT(choseStatus());
+//    }
+    private void choseStatus() {
+        if (rdThanhToan.isSelected()) {
+            loadTBDSHD();
         } else if (rdThanhToan.isSelected()) {
-            index = 1;
+
         } else if (rdChuaThanhToan.isSelected()) {
-            index = 2;
+
         }
-        return index;
     }
-    private void loadStatus() {
-        hdsv.getOne(choseStatus());
-        loadTBDSHD();
-    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -127,9 +128,9 @@ public class JFormBanHang extends javax.swing.JPanel {
         tblDSSP = new javax.swing.JTable();
         panelBorder2 = new com.raven.swing.PanelBorder();
         jLabel4 = new javax.swing.JLabel();
-        spTable2 = new javax.swing.JScrollPane();
-        tblGioHang = new com.raven.swing.Table();
         btnXoa = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblGioHang = new javax.swing.JTable();
         panelBorder3 = new com.raven.swing.PanelBorder();
         jLabel3 = new javax.swing.JLabel();
         spTable1 = new javax.swing.JScrollPane();
@@ -258,7 +259,7 @@ public class JFormBanHang extends javax.swing.JPanel {
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(jScrollPane1))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 726, Short.MAX_VALUE))
                     .addGroup(panelBorder1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -270,8 +271,8 @@ public class JFormBanHang extends javax.swing.JPanel {
                 .addGap(8, 8, 8)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         panelBorder2.setBackground(new java.awt.Color(255, 255, 255));
@@ -285,33 +286,29 @@ public class JFormBanHang extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(127, 127, 127));
         jLabel4.setText("Giỏ Hàng");
 
-        spTable2.setBorder(null);
+        btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/Xoa.png"))); // NOI18N
+        btnXoa.setText("Xóa tất cả");
 
         tblGioHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Name", "Email", "User Type", "Joined", "Status"
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         tblGioHang.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                tblGioHangMouseReleased(evt);
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblGioHangMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblGioHangMousePressed(evt);
             }
         });
-        spTable2.setViewportView(tblGioHang);
-
-        btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/Xoa.png"))); // NOI18N
-        btnXoa.setText("Xóa tất cả");
+        jScrollPane2.setViewportView(tblGioHang);
 
         javax.swing.GroupLayout panelBorder2Layout = new javax.swing.GroupLayout(panelBorder2);
         panelBorder2.setLayout(panelBorder2Layout);
@@ -320,12 +317,12 @@ public class JFormBanHang extends javax.swing.JPanel {
             .addGroup(panelBorder2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(spTable2)
                     .addGroup(panelBorder2Layout.createSequentialGroup()
                         .addGroup(panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(btnXoa))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 619, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2))
                 .addContainerGap())
         );
         panelBorder2Layout.setVerticalGroup(
@@ -334,10 +331,10 @@ public class JFormBanHang extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(spTable2, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnXoa)
-                .addGap(8, 8, 8))
+                .addContainerGap())
         );
 
         panelBorder3.setBackground(new java.awt.Color(255, 255, 255));
@@ -389,6 +386,11 @@ public class JFormBanHang extends javax.swing.JPanel {
 
         buttonGroup1.add(rdChuaThanhToan);
         rdChuaThanhToan.setText("Chưa Thanh Toán");
+        rdChuaThanhToan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rdChuaThanhToanMouseClicked(evt);
+            }
+        });
         rdChuaThanhToan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rdChuaThanhToanActionPerformed(evt);
@@ -397,6 +399,11 @@ public class JFormBanHang extends javax.swing.JPanel {
 
         buttonGroup1.add(rdTatCa);
         rdTatCa.setText("Tất cả");
+        rdTatCa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rdTatCaMouseClicked(evt);
+            }
+        });
         rdTatCa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rdTatCaActionPerformed(evt);
@@ -665,7 +672,7 @@ public class JFormBanHang extends javax.swing.JPanel {
                         .addContainerGap())
                     .addGroup(panelBorder5Layout.createSequentialGroup()
                         .addComponent(jLabel6)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 149, Short.MAX_VALUE))))
         );
         panelBorder5Layout.setVerticalGroup(
             panelBorder5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -674,7 +681,7 @@ public class JFormBanHang extends javax.swing.JPanel {
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 613, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         panelBorder6.setBackground(new java.awt.Color(255, 255, 255));
@@ -741,9 +748,17 @@ public class JFormBanHang extends javax.swing.JPanel {
 
     private void tblHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonMouseClicked
         // TODO add your handling code here:
-        
-//        int chonCot = tblHoaDon.getSelectedRow();
-//        String layMa = (String) tblHoaDon.getValueAt(chonCot, 1);
+        int chonCot = tblHoaDon.getSelectedRow();
+        String layMa = (String) tblHoaDon.getValueAt(chonCot, 0);
+        List<GioHangVM> listGH = ghsv.getOne(layMa);
+        DefaultTableModel model = new DefaultTableModel();
+        model.setColumnIdentifiers(new String[]{"Mã hóa đơn", "Tên sản phẩm", "Tên loại", "Chất liệu", "Màu sắc", "Size", "Số lượng", "Đơn giá"});
+        for (GioHangVM x : listGH) {
+            model.addRow(new Object[]{x.getMaHD(), x.getTenSP(), x.getTenLoaiSP(),
+                x.getTenCL(), x.getTenMS(), x.getTenSize(), x.getSoLuong(), x.getDonGia()});
+        }
+        tblGioHang.setModel(model);
+
 //        ghsv.getOne(layMa);
     }//GEN-LAST:event_tblHoaDonMouseClicked
     private HoaDonDM getIputHD() {
@@ -778,7 +793,13 @@ public class JFormBanHang extends javax.swing.JPanel {
 
     private void rdThanhToanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdThanhToanMouseClicked
         // TODO add your handling code here:
-
+        List<HoaDonVM> listHD = hdsv.findByTT(1);
+        DefaultTableModel model = new DefaultTableModel();
+        model.setColumnIdentifiers(new String[]{"Mã hóa đơn", "Ngày tạo", "Tên khách hàng", "Trạng thái"});
+        for (HoaDonVM x : listHD) {
+            model.addRow(new Object[]{x.getMaHD(), x.getNgayTao(), x.getTenKH(), x.loadTrangThai()});
+        }
+        tblHoaDon.setModel(model);
     }//GEN-LAST:event_rdThanhToanMouseClicked
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -787,9 +808,7 @@ public class JFormBanHang extends javax.swing.JPanel {
 
     private void panelBorder2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBorder2MouseReleased
         // TODO add your handling code here:
-        if (evt.isPopupTrigger()) {
-            popMenuGH.show(panelBorder2, evt.getX(), evt.getX());
-        }
+
     }//GEN-LAST:event_panelBorder2MouseReleased
 
     private void tblHoaDonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonMouseReleased
@@ -804,16 +823,40 @@ public class JFormBanHang extends javax.swing.JPanel {
         int layGiaTri = (int) tblDSSP.getValueAt(chonCot, 7);
         if (data > layGiaTri) {
             JOptionPane.showMessageDialog(this, "Nhập số lượng muốn mua nhỏ hơn số lượng tồn!!!");
+        } else if (soLuong == null || data <= 0) {
+            JOptionPane.showMessageDialog(this, "Nhập số lượng muốn mua lớn hơn hoặc bằng 0");
         } else {
+
         }
     }//GEN-LAST:event_tblDSSPMouseClicked
 
-    private void tblGioHangMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGioHangMouseReleased
+    private void tblGioHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGioHangMouseClicked
         // TODO add your handling code here:
-        //        if (evt.isPopupTrigger()) {
-            //            popMenuGH.show(panelBorder2, evt.getX(), evt.getX());
-            //        }
-    }//GEN-LAST:event_tblGioHangMouseReleased
+
+    }//GEN-LAST:event_tblGioHangMouseClicked
+
+    private void tblGioHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGioHangMousePressed
+        // TODO add your handling code here:
+        if (evt.isPopupTrigger()) {
+            popMenuGH.show(panelBorder2, evt.getX(), evt.getX());
+        }
+    }//GEN-LAST:event_tblGioHangMousePressed
+
+    private void rdTatCaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdTatCaMouseClicked
+        // TODO add your handling code here:
+        loadTBDSHD();
+    }//GEN-LAST:event_rdTatCaMouseClicked
+
+    private void rdChuaThanhToanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdChuaThanhToanMouseClicked
+        // TODO add your handling code here:
+        List<HoaDonVM> listHD = hdsv.findByTT(2);
+        DefaultTableModel model = new DefaultTableModel();
+        model.setColumnIdentifiers(new String[]{"Mã hóa đơn", "Ngày tạo", "Tên khách hàng", "Trạng thái"});
+        for (HoaDonVM x : listHD) {
+            model.addRow(new Object[]{x.getMaHD(), x.getNgayTao(), x.getTenKH(), x.loadTrangThai()});
+        }
+        tblHoaDon.setModel(model);
+    }//GEN-LAST:event_rdChuaThanhToanMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -843,6 +886,7 @@ public class JFormBanHang extends javax.swing.JPanel {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JLabel lbngayHienTai;
@@ -861,10 +905,9 @@ public class JFormBanHang extends javax.swing.JPanel {
     private javax.swing.JRadioButton rdTatCa;
     private javax.swing.JRadioButton rdThanhToan;
     private javax.swing.JScrollPane spTable1;
-    private javax.swing.JScrollPane spTable2;
     private javax.swing.JScrollPane spTable3;
     private javax.swing.JTable tblDSSP;
-    private com.raven.swing.Table tblGioHang;
+    private javax.swing.JTable tblGioHang;
     private com.raven.swing.Table tblHoaDon;
     private javax.swing.JTextField txtSDTKH;
     private javax.swing.JTextField txtTenKH;
