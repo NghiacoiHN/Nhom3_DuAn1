@@ -15,7 +15,7 @@ public interface ChatLieuService {
 
     String add(ChatLieu chatLieu);
 
-    String update(String id, ChatLieu chatLieu);
+    String update(String ma, ChatLieu chatLieu);
 
-    String delete(String id);
+    String delete(String ma);
 }

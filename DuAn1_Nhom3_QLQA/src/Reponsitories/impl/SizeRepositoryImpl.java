@@ -80,18 +80,17 @@ public class SizeRepositoryImpl implements SizeRepository{
     }
 
     @Override
-    public boolean update(String id, Size size) {
+    public boolean update(String ma, Size size) {
         int check = 0;
         try {
             Connection connection = DBConnection.getConnection();
 
-            String sql = "UPDATE Size SET MaSize = ?, TenSize = ?, TinhTrang = ? WHERE IDSize = ?";
+            String sql = "UPDATE Size SET TenSize = ?, TinhTrang = ? WHERE MaSize = ?";
 
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, size.getMa());
-            ps.setString(2, size.getCoSize());
-            ps.setInt(3, size.getTrangThai());
-            ps.setString(4, id);
+            ps.setString(1, size.getCoSize());
+            ps.setInt(2, size.getTrangThai());
+            ps.setString(3, ma);
 
             check = ps.executeUpdate();
 
@@ -104,15 +103,15 @@ public class SizeRepositoryImpl implements SizeRepository{
     }
 
     @Override
-    public boolean delete(String id) {
+    public boolean delete(String ma) {
         int check = 0;
         try {
             Connection connection = DBConnection.getConnection();
 
-            String sql = "UPDATE Size SET TinhTrang = 10 WHERE IDSize = ?";
+            String sql = "UPDATE Size SET TinhTrang = 10 WHERE MaSize = ?";
 
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, id);
+            ps.setString(1, ma);
 
             check = ps.executeUpdate();
 

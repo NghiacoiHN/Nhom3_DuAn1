@@ -85,13 +85,12 @@ public class LoaiSpRepositoryImpl implements LoaiSpRepository{
         try {
             Connection connection = DBConnection.getConnection();
 
-            String sql = "UPDATE LoaiSP SET MaLSP = ?, TenLSP = ?, TinhTrang = ? WHERE IDLSP = ?";
+            String sql = "UPDATE LoaiSP SET TenLSP = ?, TinhTrang = ? WHERE MaLSP = ?";
 
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, loaiSP.getMa());
-            ps.setString(2, loaiSP.getTen());
-            ps.setInt(3, loaiSP.getTrangThai());
-            ps.setString(4, id);
+            ps.setString(1, loaiSP.getTen());
+            ps.setInt(2, loaiSP.getTrangThai());
+            ps.setString(3, id);
 
             check = ps.executeUpdate();
 
@@ -109,7 +108,7 @@ public class LoaiSpRepositoryImpl implements LoaiSpRepository{
         try {
             Connection connection = DBConnection.getConnection();
 
-            String sql = "UPDATE LoaiSP SET TinhTrang = 10 WHERE IDLSP = ?";
+            String sql = "UPDATE LoaiSP SET TinhTrang = 10 WHERE MaLSP = ?";
 
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, id);

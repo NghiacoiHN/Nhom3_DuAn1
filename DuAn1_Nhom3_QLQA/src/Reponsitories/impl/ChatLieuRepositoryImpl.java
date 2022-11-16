@@ -80,18 +80,17 @@ public class ChatLieuRepositoryImpl implements ChatLieuRepository{
     }
 
     @Override
-    public boolean update(String id, ChatLieu chatLieu) {
+    public boolean update(String ma, ChatLieu chatLieu) {
         int check = 0;
         try {
             Connection connection = DBConnection.getConnection();
 
-            String sql = "UPDATE ChatLieu SET MaCL = ?, TenCL = ?, TinhTrang = ? WHERE IDCL = ?";
+            String sql = "UPDATE ChatLieu SET TenCL = ?, TinhTrang = ? WHERE MaCL = ?";
 
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, chatLieu.getMa());
-            ps.setString(2, chatLieu.getTen());
-            ps.setInt(3, chatLieu.getTrangThai());
-            ps.setString(4, id);
+            ps.setString(1, chatLieu.getTen());
+            ps.setInt(2, chatLieu.getTrangThai());
+            ps.setString(3, ma);
 
             check = ps.executeUpdate();
 
@@ -104,15 +103,15 @@ public class ChatLieuRepositoryImpl implements ChatLieuRepository{
     }
 
     @Override
-    public boolean delete(String id) {
+    public boolean delete(String ma) {
         int check = 0;
         try {
             Connection connection = DBConnection.getConnection();
 
-            String sql = "UPDATE ChatLieu SET TinhTrang = 10 WHERE IDCL = ?";
+            String sql = "UPDATE ChatLieu SET TinhTrang = 10 WHERE MaCL = ?";
 
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, id);
+            ps.setString(1, ma);
 
             check = ps.executeUpdate();
 
