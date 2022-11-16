@@ -62,6 +62,7 @@ public class HoaDonRepon implements HoaDonIRepon {
                 hoaDon1.setNgayTao(rs.getString("NgayTao"));
                 hoaDon1.setTenKH(rs.getString("TenKH"));
                 hoaDon1.setTrangThai(rs.getInt("TrangThai"));
+                ps.executeUpdate();
                 return hoaDon1;
             }
         } catch (SQLException e) {

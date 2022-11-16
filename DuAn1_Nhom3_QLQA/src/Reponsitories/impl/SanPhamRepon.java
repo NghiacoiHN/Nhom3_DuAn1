@@ -25,11 +25,14 @@ public class SanPhamRepon implements SanPhamIRepon {
     @Override
     public List<SanPhamVM> findAll() {
         List<SanPhamVM> products = new ArrayList<>();
-        String sql = "Select MaCTSP, TenCL, TenMS, TenSize, TenSp, MoTa, SoLuongTon, GiaNhap, GiaBan, TrangThai\n"
-                + "                       from ChiTietSanPham join ChatLieu on ChiTietSanPham.IDCL = ChatLieu.IDCL\n"
-                + "                       					join MauSac on ChiTietSanPham.IDMS = MauSac.IDMS\n"
-                + "                       					join Size on ChiTietSanPham.IDSize = size.IDSize\n"
-                + "                       					join SanPham on ChiTietSanPham.IDSP = SanPham.IDSP";
+        String sql = "SELECT ChiTietSanPham.MaCTSP, SanPham.TenSp, LoaiSP.TenLSP, ChatLieu.TenCL, MauSac.TenMS, Size.TenSize, ChiTietSanPham.GiaBan, ChiTietSanPham.SoLuongTon\n"
+                + "FROM     ChiTietSanPham INNER JOIN\n"
+                + "                  SanPham ON ChiTietSanPham.IDSP = SanPham.IDSP INNER JOIN\n"
+                + "                  LoaiSPCT ON ChiTietSanPham.IDCTSP = LoaiSPCT.IDCTSP INNER JOIN\n"
+                + "                  LoaiSP ON LoaiSPCT.IDLSP = LoaiSP.IDLSP INNER JOIN\n"
+                + "                  ChatLieu ON ChiTietSanPham.IDCL = ChatLieu.IDCL INNER JOIN\n"
+                + "                  MauSac ON ChiTietSanPham.IDMS = MauSac.IDMS INNER JOIN\n"
+                + "                  Size ON ChiTietSanPham.IDSize = Size.IDSize";
         try {
             Connection connection = DBConnection.getConnection();
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -44,7 +47,7 @@ public class SanPhamRepon implements SanPhamIRepon {
                 sanPham1.setTenSize(rs.getString("TenSize"));
                 sanPham1.setSoLuongTon(rs.getInt("SoLuongTon"));
                 sanPham1.setGiaBan(rs.getBigDecimal("GiaBan"));
-                sanPham1.setTrangThai(rs.getInt("TrangThai"));
+//                sanPham1.setTrangThai(rs.getInt("TrangThai"));
                 products.add(sanPham1);
             }
             rs.close();
