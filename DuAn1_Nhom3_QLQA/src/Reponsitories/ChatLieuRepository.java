@@ -15,7 +15,7 @@ public interface ChatLieuRepository {
 
     boolean add(ChatLieu chatLieu);
     
-    boolean update(String id, ChatLieu chatLieu);
+    boolean update(String ma, ChatLieu chatLieu);
     
-    boolean delete(String id);
+    boolean delete(String ma);
 }

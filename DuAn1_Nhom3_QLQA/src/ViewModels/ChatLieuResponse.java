@@ -58,5 +58,14 @@ public class ChatLieuResponse {
         return ten;
     }
 
-    
+    public String trangThai(){
+        if(trangThai == 1){
+            return "Còn";
+        }
+        else if(trangThai == 10){
+            return "Hết";
+        }else{
+            return "Chưa xác định";
+        }
+    }
 }

@@ -77,18 +77,17 @@ public class MauSacRepositoryImpl implements MauSacRepository{
     }
 
     @Override
-    public boolean update(String id, MauSac mauSac) {
+    public boolean update(String ma, MauSac mauSac) {
         int check = 0;
         try {
             Connection connection = DBConnection.getConnection();
             
-            String sql = "UPDATE MauSac SET MaMS = ?, TenMS = ?, TinhTrang = ? WHERE IDMS = ?";
+            String sql = "UPDATE MauSac SET TenMS = ?, TinhTrang = ? WHERE MaMS = ?";
             
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, mauSac.getMa());
-            ps.setString(2, mauSac.getTen());
-            ps.setInt(3, mauSac.getTrangThai());
-            ps.setString(4, id);
+            ps.setString(1, mauSac.getTen());
+            ps.setInt(2, mauSac.getTrangThai());
+            ps.setString(3, ma);
             
             check = ps.executeUpdate();
             
@@ -101,15 +100,15 @@ public class MauSacRepositoryImpl implements MauSacRepository{
     }
 
     @Override
-    public boolean delete(String id) {
+    public boolean delete(String ma) {
         int check = 0;
         try {
             Connection connection = DBConnection.getConnection();
             
-            String sql = "UPDATE SanPham SET TinhTrang = 10 WHERE IDMS = ?";
+            String sql = "UPDATE SanPham SET TinhTrang = 10 WHERE MaMS = ?";
             
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, id);
+            ps.setString(1, ma);
             
             check = ps.executeUpdate();
             

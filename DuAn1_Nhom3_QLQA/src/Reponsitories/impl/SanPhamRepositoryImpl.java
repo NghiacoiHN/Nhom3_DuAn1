@@ -80,18 +80,17 @@ public class SanPhamRepositoryImpl implements SanPhamRepository{
     }
 
     @Override
-    public boolean update(String id, SanPham sanPham) {
+    public boolean update(String ma, SanPham sanPham) {
         int check = 0;
         try {
             Connection connection = DBConnection.getConnection();
 
-            String sql = "UPDATE SanPham SET MaSP = ?, TenSp = ?, TinhTrang = ? WHERE IDSP = ?";
+            String sql = "UPDATE SanPham SET TenSp = ?, TinhTrang = ? WHERE MaSP = ?";
 
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, sanPham.getMa());
-            ps.setString(2, sanPham.getTen());
-            ps.setInt(3, sanPham.getTrangThai());
-            ps.setString(4, id);
+            ps.setString(1, sanPham.getTen());
+            ps.setInt(2, sanPham.getTrangThai());
+            ps.setString(3, ma);
 
             check = ps.executeUpdate();
 
@@ -104,15 +103,15 @@ public class SanPhamRepositoryImpl implements SanPhamRepository{
     }
 
     @Override
-    public boolean delete(String id) {
+    public boolean delete(String ma) {
         int check = 0;
         try {
             Connection connection = DBConnection.getConnection();
 
-            String sql = "UPDATE SanPham SET TinhTrang = 10 WHERE IDSP = ?";
+            String sql = "UPDATE SanPham SET TinhTrang = 10 WHERE TenSp = ?";
 
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, id);
+            ps.setString(1, ma);
 
             check = ps.executeUpdate();
 
