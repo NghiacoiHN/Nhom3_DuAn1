@@ -18,7 +18,11 @@ import java.util.logging.Logger;
 public class DBConnection {
      private static final String USERNAME = "sa";
     private static final String PASSWORD = "123456789";
+<<<<<<< HEAD
     private static final String SERVER_NAME = "Localhost";
+=======
+    private static final String SERVER_NAME = "localhost";
+>>>>>>> origin/Tu4n
     private static final String PORT = "1433";
     private static final String DATABASE_NAME = "DuAn_1";
     private static final boolean USING_SSL = true;
