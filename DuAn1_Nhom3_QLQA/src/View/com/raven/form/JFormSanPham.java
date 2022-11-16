@@ -134,7 +134,7 @@ public class JFormSanPham extends javax.swing.JPanel {
         if (tblChiTietSP.getValueAt(index, 9).toString().equalsIgnoreCase("còn bán")) {
             rdConHang.setSelected(true);
         }
-        if (tblChiTietSP.getValueAt(index, 9).toString().equalsIgnoreCase("ngừng bán")) {
+        if (tblChiTietSP.getValueAt(index, 9).toString().equalsIgnoreCase("ngừng kinh doanh")) {
             rdNgungKD.setSelected(true);
         }
 
