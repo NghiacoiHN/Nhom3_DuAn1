@@ -20,5 +20,6 @@ public interface ChiTietSPService {
     String add(ChiTietSP ctsp);
     String update(ChiTietSP ctsp);
     String delete(String maCTSP);
+    String xoaMem(String maCTSP);
     
 }

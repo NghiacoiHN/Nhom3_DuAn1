@@ -18,5 +18,6 @@ public interface ChiTietSPReponsitory {
     Integer add(ChiTietSP ctsp);
     Integer update(ChiTietSP ctsp);
     Integer delete(String maCTSP);
+    Integer xoaMem(String maCTSP);
     
 }

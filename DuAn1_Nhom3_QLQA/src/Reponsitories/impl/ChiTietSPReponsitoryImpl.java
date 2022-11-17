@@ -161,4 +161,20 @@ public class ChiTietSPReponsitoryImpl implements ChiTietSPReponsitory{
         }
     
     }
+
+    @Override
+    public Integer xoaMem(String maCTSP) {
+        String sql = """
+                     UPDATE [dbo].[ChiTietSanPham]
+                                         SET [TrangThai] = 2
+                                       WHERE MaCTSP = ? """;
+        try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(sql);){
+            ps.setString(1, maCTSP);
+            return ps.executeUpdate();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
 }

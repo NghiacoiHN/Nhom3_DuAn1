@@ -964,7 +964,7 @@ public class JFormSanPham extends javax.swing.JPanel {
         } else {
             int chon = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn xóa chứ?", "Xác nhận xóa", JOptionPane.YES_NO_OPTION);
             if (chon == JOptionPane.YES_OPTION) {
-                JOptionPane.showMessageDialog(this, ctspService.delete(txtMaCTSP.getText()));
+                JOptionPane.showMessageDialog(this, ctspService.xoaMem(txtMaCTSP.getText()));
                 loadCTSP();
             }
         }

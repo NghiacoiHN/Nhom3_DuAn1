@@ -126,4 +126,13 @@ public class ChiTietSPServiceImpl implements ChiTietSPService {
         return "Ok";
     }
 
+    @Override
+    public String xoaMem(String maCTSP) {
+        if (ctspRepo.xoaMem(maCTSP) < 0) {
+            return "Xóa thất bại";
+        } else {
+            return "Xóa thành công";
+        }
+    }
+
 }
