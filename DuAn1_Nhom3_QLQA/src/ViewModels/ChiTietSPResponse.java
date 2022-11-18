@@ -16,6 +16,7 @@ public class ChiTietSPResponse {
     private String mauSac;
     private String size;
     private String sanPham;
+    
     private String moTa;
     private int soLuongTon;
     private BigDecimal giaNhap;
