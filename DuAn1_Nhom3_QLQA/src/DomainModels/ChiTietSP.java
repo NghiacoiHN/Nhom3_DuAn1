@@ -17,6 +17,8 @@ public class ChiTietSP {
     private String idMauSac;
     private String idSize;
     private String idSP;
+    private String idLoaiSP;
+    private String idXuatXu;
     private String moTa;
     private int soLuongTon;
     private BigDecimal giaNhap;
@@ -26,13 +28,15 @@ public class ChiTietSP {
     public ChiTietSP() {
     }
 
-    public ChiTietSP(String idChiTietSP, String maChiTietSP, String idChatLieu, String idMauSac, String idSize, String idSP, String moTa, int soLuongTon, BigDecimal giaNhap, BigDecimal giaBan, int trangThai) {
+    public ChiTietSP(String idChiTietSP, String maChiTietSP, String idChatLieu, String idMauSac, String idSize, String idSP, String idLoaiSP, String idXuatXu, String moTa, int soLuongTon, BigDecimal giaNhap, BigDecimal giaBan, int trangThai) {
         this.idChiTietSP = idChiTietSP;
         this.maChiTietSP = maChiTietSP;
         this.idChatLieu = idChatLieu;
         this.idMauSac = idMauSac;
         this.idSize = idSize;
         this.idSP = idSP;
+        this.idLoaiSP = idLoaiSP;
+        this.idXuatXu = idXuatXu;
         this.moTa = moTa;
         this.soLuongTon = soLuongTon;
         this.giaNhap = giaNhap;
@@ -86,6 +90,22 @@ public class ChiTietSP {
 
     public void setIdSP(String idSP) {
         this.idSP = idSP;
+    }
+
+    public String getIdLoaiSP() {
+        return idLoaiSP;
+    }
+
+    public void setIdLoaiSP(String idLoaiSP) {
+        this.idLoaiSP = idLoaiSP;
+    }
+
+    public String getIdXuatXu() {
+        return idXuatXu;
+    }
+
+    public void setIdXuatXu(String idXuatXu) {
+        this.idXuatXu = idXuatXu;
     }
 
     public String getMoTa() {

@@ -16,6 +16,8 @@ public class ChiTietSPResponse {
     private String mauSac;
     private String size;
     private String sanPham;
+    private String loaiSP;
+    private String xuatXu;
     
     private String moTa;
     private int soLuongTon;
@@ -26,12 +28,14 @@ public class ChiTietSPResponse {
     public ChiTietSPResponse() {
     }
 
-    public ChiTietSPResponse(String maChiTietSP, String chatLieu, String mauSac, String size, String sanPham, String moTa, int soLuongTon, BigDecimal giaNhap, BigDecimal giaBan, int trangThai) {
+    public ChiTietSPResponse(String maChiTietSP, String chatLieu, String mauSac, String size, String sanPham, String loaiSP, String xuatXu, String moTa, int soLuongTon, BigDecimal giaNhap, BigDecimal giaBan, int trangThai) {
         this.maChiTietSP = maChiTietSP;
         this.chatLieu = chatLieu;
         this.mauSac = mauSac;
         this.size = size;
         this.sanPham = sanPham;
+        this.loaiSP = loaiSP;
+        this.xuatXu = xuatXu;
         this.moTa = moTa;
         this.soLuongTon = soLuongTon;
         this.giaNhap = giaNhap;
@@ -79,6 +83,22 @@ public class ChiTietSPResponse {
         this.sanPham = sanPham;
     }
 
+    public String getLoaiSP() {
+        return loaiSP;
+    }
+
+    public void setLoaiSP(String loaiSP) {
+        this.loaiSP = loaiSP;
+    }
+
+    public String getXuatXu() {
+        return xuatXu;
+    }
+
+    public void setXuatXu(String xuatXu) {
+        this.xuatXu = xuatXu;
+    }
+
     public String getMoTa() {
         return moTa;
     }
@@ -119,11 +139,13 @@ public class ChiTietSPResponse {
         this.trangThai = trangThai;
     }
 
+    
+
     public String trangThai(){
         if(trangThai == 1){
             return "Còn bán";
         }
-        else if(trangThai == 2){
+        else if(trangThai == 10){
             return "Ngừng kinh doanh";
         }else{
             return "Chưa xác định";
