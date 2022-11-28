@@ -167,11 +167,11 @@
                                           <Component id="btnThem2" min="-2" pref="90" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Component id="btnSua2" min="-2" pref="90" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Component id="btnXoa2" min="-2" pref="90" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
+                                  <EmptySpace pref="719" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -215,6 +215,11 @@
                                               <Component id="txtGiaNhap" min="-2" pref="180" max="-2" attributes="0"/>
                                               <Component id="txtSoLuongTon" min="-2" pref="180" max="-2" attributes="0"/>
                                               <Component id="txtGiaBan" min="-2" pref="180" max="-2" attributes="0"/>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="btnImport" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Component id="btnExport" min="-2" max="-2" attributes="0"/>
+                                              </Group>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -331,6 +336,8 @@
                               <Component id="btnThem2" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnSua2" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnXoa2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnImport" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnExport" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -553,6 +560,19 @@
                     <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox&lt;XuatXuResponse&gt;()"/>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;XuatXuResponse&gt;"/>
                   </AuxValues>
+                </Component>
+                <Component class="javax.swing.JButton" name="btnImport">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Import"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnImportActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="btnExport">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Export"/>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>

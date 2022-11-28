@@ -35,8 +35,22 @@ import ViewModels.MauSacResponse;
 import ViewModels.SanPhamResponse;
 import ViewModels.SizeResponse;
 import ViewModels.XuatXuResponse;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -66,10 +80,10 @@ public class JFormSanPham extends javax.swing.JPanel {
         DefaultTableModel model = new DefaultTableModel();
         model.setColumnCount(0);
         model.setRowCount(0);
-        model.setColumnIdentifiers(new String[]{"Mã chi tiết sản phẩm", "Chất liệu", "Màu sắc", "Size", "Sản phẩm", "Loại sản phẩm", "Xuất xứ","Mô tả", "Số lượng tồn",
+        model.setColumnIdentifiers(new String[]{"Mã chi tiết sản phẩm", "Chất liệu", "Màu sắc", "Size", "Sản phẩm", "Loại sản phẩm", "Xuất xứ", "Mô tả", "Số lượng tồn",
             "Giá nhập", "Giá bán", "Trạng thái"});
         for (ChiTietSPResponse ctsp : listCTSP) {
-            model.addRow(new Object[]{ctsp.getMaChiTietSP(), ctsp.getChatLieu(), ctsp.getMauSac(), ctsp.getSize(), ctsp.getSanPham(), ctsp.getLoaiSP(), ctsp.getXuatXu(),ctsp.getMoTa(),
+            model.addRow(new Object[]{ctsp.getMaChiTietSP(), ctsp.getChatLieu(), ctsp.getMauSac(), ctsp.getSize(), ctsp.getSanPham(), ctsp.getLoaiSP(), ctsp.getXuatXu(), ctsp.getMoTa(),
                 ctsp.getSoLuongTon(), ctsp.getGiaNhap(), ctsp.getGiaBan(), ctsp.trangThai()});
         }
         tblChiTietSP.setModel(model);
@@ -135,7 +149,7 @@ public class JFormSanPham extends javax.swing.JPanel {
         }
         tblThuocTinh.setModel(model);
     }
-    
+
     public void loadXuatXu() {
         List<XuatXuResponse> dsXuatXu = xuatXuService.getAll();
         DefaultTableModel model = new DefaultTableModel();
@@ -172,19 +186,19 @@ public class JFormSanPham extends javax.swing.JPanel {
         for (SanPhamResponse sp : listSP) {
             cbSanPham.addItem(sp);
         }
-        
+
         cbLoaiSP.removeAllItems();
         List<LoaiSpResponse> listLSP = loaiService.getAll();
         for (LoaiSpResponse loaiSP : listLSP) {
             cbLoaiSP.addItem(loaiSP);
         }
-        
+
         cbXuatXu.removeAllItems();
         List<XuatXuResponse> listXX = xuatXuService.getAll();
         for (XuatXuResponse xx : listXX) {
             cbXuatXu.addItem(xx);
         }
-        
+
     }
 
     public void loadTextField(int index) {
@@ -225,26 +239,26 @@ public class JFormSanPham extends javax.swing.JPanel {
                 cbSanPham.setSelectedIndex(i);
             }
         }
-        
+
         for (int i = 0; i < cbLoaiSP.getItemCount(); i++) {
             String cblsp = cbLoaiSP.getItemAt(i).getTen();
             String tblsp = tblChiTietSP.getValueAt(index, 5).toString();
-            
-            if(cblsp.equalsIgnoreCase(tblsp)){
+
+            if (cblsp.equalsIgnoreCase(tblsp)) {
                 cbLoaiSP.setSelectedIndex(i);
             }
         }
-        
+
         for (int i = 0; i < cbXuatXu.getItemCount(); i++) {
             String cbxx = cbXuatXu.getItemAt(i).getTen();
             String tbxx = tblChiTietSP.getValueAt(index, 6).toString();
-            
-            if(cbxx.equalsIgnoreCase(tbxx)){
+
+            if (cbxx.equalsIgnoreCase(tbxx)) {
                 cbXuatXu.setSelectedIndex(i);
             }
-            
+
         }
-        
+
         txtMota.setText(tblChiTietSP.getValueAt(index, 7).toString());
         txtSoLuongTon.setText(tblChiTietSP.getValueAt(index, 8).toString());
         txtGiaNhap.setText(tblChiTietSP.getValueAt(index, 9).toString());
@@ -276,10 +290,10 @@ public class JFormSanPham extends javax.swing.JPanel {
 
         SanPhamResponse sp = (SanPhamResponse) cbSanPham.getSelectedItem();
         ctsp.setIdSP(sp.getId());
-        
+
         LoaiSpResponse lsp = (LoaiSpResponse) cbLoaiSP.getSelectedItem();
         ctsp.setIdLoaiSP(lsp.getId());
-        
+
         XuatXuResponse xx = (XuatXuResponse) cbXuatXu.getSelectedItem();
         ctsp.setIdXuatXu(xx.getId());
 
@@ -367,7 +381,7 @@ public class JFormSanPham extends javax.swing.JPanel {
 
         return loaiSp;
     }
-    
+
     public XuatXu getDataXuatXu() {
         XuatXu xuatXu = new XuatXu();
         xuatXu.setMa(txtMaThuocTinh.getText().trim());
@@ -506,6 +520,8 @@ public class JFormSanPham extends javax.swing.JPanel {
         cbLoaiSP = new javax.swing.JComboBox<LoaiSpResponse>();
         jLabel19 = new javax.swing.JLabel();
         cbXuatXu = new javax.swing.JComboBox<XuatXuResponse>();
+        btnImport = new javax.swing.JButton();
+        btnExport = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         panelBorder2 = new com.raven.swing.PanelBorder();
         jLabel4 = new javax.swing.JLabel();
@@ -657,6 +673,15 @@ public class JFormSanPham extends javax.swing.JPanel {
 
         cbXuatXu.setModel(new javax.swing.DefaultComboBoxModel<XuatXuResponse>());
 
+        btnImport.setText("Import");
+        btnImport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImportActionPerformed(evt);
+            }
+        });
+
+        btnExport.setText("Export");
+
         javax.swing.GroupLayout panelBorder7Layout = new javax.swing.GroupLayout(panelBorder7);
         panelBorder7.setLayout(panelBorder7Layout);
         panelBorder7Layout.setHorizontalGroup(
@@ -671,9 +696,9 @@ public class JFormSanPham extends javax.swing.JPanel {
                                 .addComponent(btnThem2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnSua2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(29, 29, 29)
+                                .addGap(18, 18, 18)
                                 .addComponent(btnXoa2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(719, Short.MAX_VALUE))
                     .addGroup(panelBorder7Layout.createSequentialGroup()
                         .addGroup(panelBorder7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
@@ -708,7 +733,11 @@ public class JFormSanPham extends javax.swing.JPanel {
                                 .addGroup(panelBorder7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtGiaNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtSoLuongTon, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtGiaBan, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(txtGiaBan, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(panelBorder7Layout.createSequentialGroup()
+                                        .addComponent(btnImport)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnExport)))))
                         .addGap(37, 37, 37)
                         .addGroup(panelBorder7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel15)
@@ -792,7 +821,9 @@ public class JFormSanPham extends javax.swing.JPanel {
                 .addGroup(panelBorder7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThem2)
                     .addComponent(btnSua2)
-                    .addComponent(btnXoa2))
+                    .addComponent(btnXoa2)
+                    .addComponent(btnImport)
+                    .addComponent(btnExport))
                 .addContainerGap())
         );
 
@@ -1163,7 +1194,7 @@ public class JFormSanPham extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, loaiService.add(getDataLoaiSp()));
                 loadLoaiSanPham();
             }
-            
+
             if (rdXuatXu.isSelected()) {
                 JOptionPane.showMessageDialog(this, xuatXuService.add(getDataXuatXu()));
                 loadXuatXu();
@@ -1198,7 +1229,7 @@ public class JFormSanPham extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, loaiService.update(getDataLoaiSp().getMa(), getDataLoaiSp()));
                 loadLoaiSanPham();
             }
-            
+
             if (rdXuatXu.isSelected()) {
                 JOptionPane.showMessageDialog(this, xuatXuService.update(getDataXuatXu().getMa(), getDataXuatXu()));
                 loadXuatXu();
@@ -1254,7 +1285,7 @@ public class JFormSanPham extends javax.swing.JPanel {
                     loadLoaiSanPham();
                 }
             }
-            
+
             if (rdXuatXu.isSelected()) {
                 int chon = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn xóa chứ?", "Xác nhận xóa", JOptionPane.YES_NO_OPTION);
                 if (chon == JOptionPane.YES_OPTION) {
@@ -1269,11 +1300,84 @@ public class JFormSanPham extends javax.swing.JPanel {
         loadXuatXu();
     }//GEN-LAST:event_rdXuatXuMouseClicked
 
+    private void btnImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = new DefaultTableModel();
+        model.setColumnCount(0);
+        model.setRowCount(0);
+        model.setColumnIdentifiers(new String[]{"Mã chi tiết sản phẩm", "Chất liệu", "Màu sắc", "Size", "Sản phẩm", "Loại sản phẩm", "Xuất xứ", "Mô tả", "Số lượng tồn",
+            "Giá nhập", "Giá bán", "Trạng thái"});
+
+        //Excel task
+        File excelFile;
+        FileInputStream excelFIS = null;
+        BufferedInputStream excelBIS = null;
+        XSSFWorkbook excelImportToJTable = null;
+        String defaultCurrentDirectoryPath = "../Excel/";
+        JFileChooser excelFileChooser = new JFileChooser(defaultCurrentDirectoryPath);
+        excelFileChooser.setDialogTitle("Select Excel File");
+        FileNameExtensionFilter fnef = new FileNameExtensionFilter("EXCEL FILES", "xls", "xlsx", "xlsm");
+        excelFileChooser.setFileFilter(fnef);
+        int excelChooser = excelFileChooser.showOpenDialog(null);
+        if (excelChooser == JFileChooser.APPROVE_OPTION) {
+            try {
+                excelFile = excelFileChooser.getSelectedFile();
+                excelFIS = new FileInputStream(excelFile);
+                excelBIS = new BufferedInputStream(excelFIS);
+                excelImportToJTable = new XSSFWorkbook(excelBIS);
+                XSSFSheet excelSheet = excelImportToJTable.getSheetAt(0);
+
+                for (int row = 1; row < excelSheet.getLastRowNum() - 1; row++) {
+                    XSSFRow excelRow = excelSheet.getRow(row);
+
+                    if (excelRow != null) {
+                        XSSFCell excelMaCTSP = excelRow.getCell(0);
+                        XSSFCell excelChatLieu = excelRow.getCell(1);
+                        XSSFCell excelMauSac = excelRow.getCell(2);
+                        XSSFCell excelSize = excelRow.getCell(3);
+                        XSSFCell excelSP = excelRow.getCell(4);
+                        XSSFCell excelLoaiSP = excelRow.getCell(5);
+                        XSSFCell excelXuatXu = excelRow.getCell(6);
+                        XSSFCell excelMota = excelRow.getCell(7);
+                        XSSFCell excelSLTon = excelRow.getCell(8);
+                        XSSFCell excelGiaNhap = excelRow.getCell(9);
+                        XSSFCell excelGiaBan = excelRow.getCell(10);
+                        XSSFCell excelTrangThai = excelRow.getCell(11);
+
+                        model.addRow(new Object[]{excelMaCTSP, excelChatLieu, excelMauSac, excelSize, excelSP, excelLoaiSP, excelXuatXu, excelMota,
+                            excelSLTon, excelGiaNhap, excelGiaBan, excelTrangThai});
+                    }
+                
+            }
+            tblChiTietSP.setModel(model);
+            JOptionPane.showMessageDialog(null, "Imported Successfully !!.....");
+        }catch (IOException iOException) {
+                JOptionPane.showMessageDialog(null, iOException.getMessage());
+            }finally {
+                try {
+                    if (excelFIS != null) {
+                        excelFIS.close();
+                    }
+                    if (excelBIS != null) {
+                        excelBIS.close();
+                    }
+                    if (excelImportToJTable != null) {
+                        excelImportToJTable.close();
+                    }
+                } catch (IOException iOException) {
+                    JOptionPane.showMessageDialog(null, iOException.getMessage());
+                }
+            }
+    }
+    }//GEN-LAST:event_btnImportActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgTTChiTietSP;
     private javax.swing.ButtonGroup bgTTThuocTinh;
     private javax.swing.ButtonGroup bgThuocTinh;
+    private javax.swing.JButton btnExport;
+    private javax.swing.JButton btnImport;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnSua2;
     private javax.swing.JButton btnThem;
