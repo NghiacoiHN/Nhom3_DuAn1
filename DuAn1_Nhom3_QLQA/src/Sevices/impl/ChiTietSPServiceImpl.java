@@ -78,12 +78,14 @@ public class ChiTietSPServiceImpl implements ChiTietSPService {
     public List<ChiTietSPResponse> getView() {
         return ctspRepo.getView();
     }
-
+    
+    
     public String checkValidate(ChiTietSP ctsp) {
         if (ctsp.getMaChiTietSP().isBlank() || String.valueOf(ctsp.getSoLuongTon()).isBlank() || String.valueOf(ctsp.getGiaNhap()).isBlank()
                 || String.valueOf(ctsp.getGiaBan()).isBlank()) {
             return "Không được để trống dữ liệu";
         }
+        
 
         if (ctsp.getMaChiTietSP().length() > 20) {
             return "Mã chi tiết sản phẩm không được quá 20 ký tự";
@@ -134,5 +136,6 @@ public class ChiTietSPServiceImpl implements ChiTietSPService {
             return "Xóa thành công";
         }
     }
+
 
 }

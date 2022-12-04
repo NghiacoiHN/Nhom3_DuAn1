@@ -22,4 +22,5 @@ public interface ChiTietSPService {
     String delete(String maCTSP);
     String xoaMem(String maCTSP);
     
+    
 }
